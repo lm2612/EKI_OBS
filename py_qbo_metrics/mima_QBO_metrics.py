@@ -31,9 +31,9 @@ rundir = basedir + f"{run_num}/"
 
 print("Reading atmos_daily_*.nc files from ", rundir)
 
-# We need to concatenate years 2-22 (previously 20-40)
+# We need to concatenate years 0-20 (previously 20-40)
 # Get first run
-filename = 'atmos_daily_2'
+filename = 'atmos_daily_0'
 try:
     dataset = nc.Dataset(rundir+filename+'.nc', 'r')
 except IOError as e:
