@@ -24,8 +24,8 @@ def get_QBO_periods_amplitudes(u_zonal, N_smooth=5, points_per_month=1):
     print(transitions)
     amplitudes = []
     for start, stop in zip(transitions[::2], transitions[2::2]):
-        period_max = np.max(u_zonal[start:stop])
-        period_min = np.min(u_zonal[start:stop])
+        period_max = np.max(u_smoothed[start:stop])
+        period_min = np.min(u_smoothed[start:stop])
         amplitudes.append((period_max - period_min) / 2)
     periods = np.array(roots[2::2] - roots[:-2:2])
 
