@@ -1,6 +1,6 @@
 # Function to return QBO period using Transition Time method
 import numpy as np
-from scipy.interpolate import InterpolatedUnivariateSpline, sproot, PPoly
+from scipy.interpolate import InterpolatedUnivariateSpline 
 
 def get_QBO_periods_amplitudes(u_zonal, N_smooth=5, points_per_month=1):
     """ Function that returns all QBO periods and amplitudes (mean and the covariance matrices)
@@ -18,10 +18,7 @@ def get_QBO_periods_amplitudes(u_zonal, N_smooth=5, points_per_month=1):
 
     # Identify zero wind transitions, i.e. find roots
     interp = InterpolatedUnivariateSpline(np.arange(len(u_smoothed)),u_smoothed ) #,k=3)
-    est_roots = int(round(len(u_smoothed) / (8 * points_per_month)))
-    print(est_roots)
-    roots = sproot((interp.get_knots(), interp.get_coeffs(), 3), mest=est_roots)
-    #roots = interp.roots()
+    roots = interp.roots()
 
     transitions = np.round(roots).astype(int)
     print(transitions)
