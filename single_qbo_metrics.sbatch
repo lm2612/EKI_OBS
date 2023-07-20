@@ -10,7 +10,7 @@
 
 # Set up conda env
 . $GROUP_HOME/lauraman/miniconda3/etc/profile.d/conda.sh
-conda activate plot_env
+conda activate EKI_env
 
 python --version
 
