@@ -14,17 +14,20 @@ from mean_lat_weighted import mean_lat_weighted
 # Get run directory from argparser
 parser = argparse.ArgumentParser(
                     description='Save QBO metrics for simulation, indexed by iteration number and run number')
-# 2 arguments: iteration and run_num.
+# 3 arguments: iteration, run_num and ensemble size
 parser.add_argument('iteration', metavar='it', type=int, nargs='+',
                      help='iteration of EKI')
 parser.add_argument('run_number', metavar='run_num', type=int, nargs='+',
-		                     help='run number refering to ensemble member ')
+                     help='run number refering to ensemble member ')
+parser.add_argument('ensemble_size', metavar='N', type=int, nargs='+',
+                     help='total number of ensemble members')
 
 args = parser.parse_args()
 iteration = args.iteration[0]
 run_num = args.run_number[0]
+N = args.ensemble_size[0]
 
-basedir = os.environ['SCRATCH']+f"/EKI/iteration_{iteration}/"
+basedir = os.environ['SCRATCH']+f"/EKI_N{N}/iteration_{iteration}/"
 #rundir = basedir + f"{run_num:02d}/"
 rundir = basedir + f"{run_num}/"
 

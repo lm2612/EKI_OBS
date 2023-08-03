@@ -16,11 +16,12 @@ python --version
 
 # Get run directory
 iteration_eki=${1?Error: no iteration given}
+N=${2?Error: no N given}
 
 # Get version info by reading line run_num 
 run_num=${SLURM_ARRAY_TASK_ID}
 echo "${run_num}"
 
 cd py_qbo_metrics/ 
-python mima_QBO_metrics.py $iteration_eki $run_num
+python mima_QBO_metrics.py $iteration_eki $run_num $N
 

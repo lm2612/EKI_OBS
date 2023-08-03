@@ -17,6 +17,7 @@ echo $SLURM_NODELIST
 echo "**************"
 
 iteration_eki=${1?Error: no EKI iteration given}
+N=${2?Error: no N given}
 
 # Get version info by reading line run_num 
 run_num=${SLURM_ARRAY_TASK_ID}
@@ -29,9 +30,8 @@ echo "**** SETUP ****"
 ulimit -s unlimited
 
 # Use cees-beta stack
-. /home/groups/s-ees/share/cees/spack_cees/scripts/cees_sw_setup-beta.sh
+module use /home/groups/s-ees/share/sdss/spack_cees/spack/share/spack/lmod_zen2_zen2-beta/linux-centos7-x86_64/Core
 
-module purge
 CEES_MODULE_SUFFIX="cees-beta"
 
 module load devel gcc/10.
@@ -51,7 +51,7 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LIBFABRIC_PATH}:${HWLOC_PATH}"
 # Set up run directory
 PLATFORM=SH03_CEES
 executable=${HOME}/MiMA/exp/exec.${PLATFORM}/mima.x
-rundir=${SCRATCH}/EKI/iteration_${iteration_eki}/${run_num}/
+rundir=${SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/${run_num}/
 
 # Set up restart files and basic input files from control run (run033)
 # which has input params cwtropics = 35,  cw = 35, Bt_0  = 0.0043,  Bt_nh = 0.0035
@@ -70,7 +70,7 @@ previous_iteration_eki=$((iteration_eki-1))
 
 # Edit input namelist for this iteration's parameters
 # Read entry from version file where version=mima_param_defs_XXXX
-mima_param_file="${SCRATCH}/EKI/iteration_${iteration_eki}/paramlist.csv"
+mima_param_file="${SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/paramlist.csv"
 
 while IFS=, read -r runid cw Bt;
 do
