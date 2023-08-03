@@ -53,10 +53,14 @@ PLATFORM=SH03_CEES
 executable=${HOME}/MiMA/exp/exec.${PLATFORM}/mima.x
 rundir=${SCRATCH}/EKI/iteration_${iteration_eki}/${run_num}/
 
+previous_iteration_eki=$((iteration_eki-1))
+
 # Set up restart files and basic input files from control run (run033)
 # which has input params cwtropics = 35,  cw = 35, Bt_0  = 0.0043,  Bt_nh = 0.0035
 input=${SCRATCH}/EKI/inputs/            # contains diag_table, field_table, input.nml and $INPUT/. Namelist is set up for 360 days
-restartdir=${SCRATCH}/EKI/restarts/     # standard restart files, all within $RESTART
+restartdir=${SCRATCH}/EKI/iteration_${previous_iteration_eki}/${run_num}/     # restart from end of prev run 
+
+echo "restarting from previous iteration ${previous_iteration_eki}. Directory ${restartdir}"
 
 # Make run dir
 [ ! -d $rundir ] && mkdir $rundir
@@ -65,7 +69,8 @@ cp $executable $rundir/
 # Copy input to rundir
 cp -r $input/* $rundir/
 # Copy restart files
-cp -r $restartdir/* $rundir/
+[ ! -d $rundir/RESTART/ ] && mkdir $rundir/RESTART/
+cp -r $restartdir/RESTART/*res* $rundir/RESTART/
 cp -r $restartdir/RESTART/*res* $rundir/INPUT/
 
 previous_iteration_eki=$((iteration_eki-1))
