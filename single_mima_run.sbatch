@@ -59,7 +59,7 @@ previous_iteration_eki=$((iteration_eki-1))
 # Set up restart files and basic input files from control run (run033)
 # which has input params cwtropics = 35,  cw = 35, Bt_0  = 0.0043,  Bt_nh = 0.0035
 input=${SCRATCH}/EKI/inputs/            # contains diag_table, field_table, input.nml and $INPUT/. Namelist is set up for 360 days
-restartdir=${SCRATCH}/EKI/iteration_${previous_iteration_eki}/${run_num}/     # restart from end of prev run 
+restartdir=${SCRATCH}/EKI_N${N}/iteration_${previous_iteration_eki}/${run_num}/     # restart from end of prev run 
 
 echo "restarting from previous iteration ${previous_iteration_eki}. Directory ${restartdir}"
 

@@ -19,7 +19,7 @@ N=${2?Error: ensemble size must be provided}
 
 next_iteration=$((${iteration_}+1))
 # Create directory for next iteration to save eki update parameters
-next_eki_dir=${SCRATCH}/EKI/iteration_${next_iteration}/
+next_eki_dir=${SCRATCH}/EKI_N${N}/iteration_${next_iteration}/
 [ ! -d ${next_eki_dir} ] && mkdir ${next_eki_dir}
 
 # do EKI update
