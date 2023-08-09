@@ -20,7 +20,7 @@ return the dataframe containing all parameter values
 """
 function ek_update(iteration_::Int64, N::Int64)
     # Recover versions from last iteration
-    last_iteration_parameter_file = "/scratch/users/lauraman/EKI_N${N}/iteration_$(iteration_)/paramlist.csv"
+    last_iteration_parameter_file = "/scratch/groups/aditis2/EKI_N$(N)/iteration_$(iteration_)/paramlist.csv"
     df_params = DataFrame(CSV.File(last_iteration_parameter_file))
     colnames = names(df_params)      # should be run_ids,cwtropics,Bt_eq 
     
@@ -72,7 +72,7 @@ function ek_update(iteration_::Int64, N::Int64)
     println("Get outputs")
     g_names = y_names
     g_ens = zeros(N, length(g_names))
-    basedir = "/scratch/users/lauraman/EKI_N${N}/iteration_$(iteration_)/"
+    basedir = "/scratch/groups/aditis2/EKI_N$(N)/iteration_$(iteration_)/"
     filename = "QBO_TT_metrics.csv"
     for run_id in 0:(N-1)
         #run_id_str = string(run_id, pad=2)
@@ -132,7 +132,7 @@ Random.seed!(rng_seed)
 df_new = ek_update(iteration_, N)
 
 next_iteration_ = iteration_+1
-next_iteration_parameter_file = "/scratch/users/lauraman/EKI_N${N}/iteration_$(next_iteration_)/paramlist.csv"
+next_iteration_parameter_file = "/scratch/groups/aditis2/EKI_N$(N)/iteration_$(next_iteration_)/paramlist.csv"
 CSV.write(next_iteration_parameter_file, string.(df_new))
 
 println("EKI update complete, written to CSV")
