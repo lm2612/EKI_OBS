@@ -51,7 +51,7 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LIBFABRIC_PATH}:${HWLOC_PATH}"
 # Set up run directory
 PLATFORM=SH03_CEES
 executable=${HOME}/MiMA/exp/exec.${PLATFORM}/mima.x
-rundir=${SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/${run_num}/
+rundir=${GROUP_SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/${run_num}/
 
 ## Run dir must already exist
 # Get most recent filename

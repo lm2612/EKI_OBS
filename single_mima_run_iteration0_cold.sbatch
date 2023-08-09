@@ -51,11 +51,12 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LIBFABRIC_PATH}:${HWLOC_PATH}"
 # Set up run directory
 PLATFORM=SH03_CEES
 executable=${HOME}/MiMA/exp/exec.${PLATFORM}/mima.x
-rundir=${SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/${run_num}/
+rundir=${GROUP_SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/${run_num}/
 
 # Set up restart files and basic input files from control run (run033)
 # which has input params cwtropics = 35,  cw = 35, Bt_0  = 0.0043,  Bt_nh = 0.0035
 input=${SCRATCH}/EKI/inputs/            # contains diag_table, field_table, input.nml and $INPUT/. Namelist is set up for 360 days
+
 ## Cold start, no restart dir
 
 # Make run dir
@@ -70,7 +71,8 @@ previous_iteration_eki=$((iteration_eki-1))
 
 # Edit input namelist for this iteration's parameters
 # Read entry from version file where version=mima_param_defs_XXXX
-mima_param_file="${SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/paramlist.csv"
+mima_param_file="${GROUP_SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/paramlist.csv"
+
 
 while IFS=, read -r runid cw Bt;
 do
