@@ -27,7 +27,7 @@ iteration = args.iteration[0]
 run_num = args.run_number[0]
 N = args.ensemble_size[0]
 
-basedir = os.environ['SCRATCH']+f"/EKI_N{N}/iteration_{iteration}/"
+basedir = os.environ['GROUP_SCRATCH']+f"/EKI_N{N}/iteration_{iteration}/"
 #rundir = basedir + f"{run_num:02d}/"
 rundir = basedir + f"{run_num}/"
 
