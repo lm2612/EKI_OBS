@@ -81,8 +81,13 @@ amplitude_mean = np.mean(amplitudes)
 # Get covariances in case we need them later
 cov = np.cov(periods, amplitudes)
 
-headers = ["run_id", "period", "amplitude", "cov_00", "cov_01", "cov_10", "cov_11"]
-savearr = np.array([run_num, period_mean, amplitude_mean, cov[0,0], cov[0,1], cov[1,0], cov[1,1]])
+N = len(periods)
+period_sem = np.std(periods)/np.sqrt(N)
+amplitude_sem = np.std(amplitudes)/np.sqrt(N)
+print(np.std(periods)/np.sqrt(N), np.std(amplitudes)/np.sqrt(N))
+
+headers = ["run_id", "period", "amplitude", "cov_00", "cov_01", "cov_10", "cov_11", "n", "period_sem", "amplitude_sem"]
+savearr = np.array([run_num, period_mean, amplitude_mean, cov[0,0], cov[0,1], cov[1,0], cov[1,1], N, period_sem, amplitude_sem])
 print(savearr)
 
 # Save to file
