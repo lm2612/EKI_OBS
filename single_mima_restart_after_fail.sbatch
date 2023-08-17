@@ -73,6 +73,10 @@ echo "**** SET UP COMPLETE ****"
 
 # Run the model
 cd $rundir
+# remove old files
+rm atmos_*.nc.0*
+
+
 echo "******* RUN MIMA *******" 
 echo "******* RESTARTING FROM $run_number *******"
 
