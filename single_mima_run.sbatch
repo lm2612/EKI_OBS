@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --nodes=1             # number of nodes
-#SBATCH --tasks-per-node=16
+#SBATCH --ntasks=16
 #SBATCH --time=48:00:00
-#SBATCH --mem-per-cpu=4G
-#SBATCH --constraint=CPU_GEN:RME
-###SBATCH --constraint="[CLASS:SH3_CBASE|CLASS:SH3_CPERF]"
+#SBATCH --mem=16G
+###SBATCH --constraint=CPU_GEN:RME
+#SBATCH --constraint="[CLASS:SH3_CBASE|CLASS:SH3_CPERF]"
 #SBATCH --job-name=mima_run   # job name
 #SBATCH --partition=serc      # partition
 #SBATCH --output=/scratch/users/lauraman/MiMA/ekp_jobs/run_%j_%a.out
@@ -108,7 +108,7 @@ NYEAR=20
 for ((i=-1;i<=$NYEAR;i++))
 do 
     echo "Running year $i ..."
-    srun --ntasks $N_PROCS mima.x
+    srun --ntasks $N_PROCS --mem 16G mima.x
     echo "Done year $i, now postprocessing... "
     $CCOMB -r atmos_daily_${i}.nc atmos_daily.nc.????
     #$CCOMB -r atmos_avg_${i}.nc atmos_avg.nc.????
