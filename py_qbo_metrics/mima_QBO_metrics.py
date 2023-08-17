@@ -37,11 +37,7 @@ print("Reading atmos_daily_*.nc files from ", rundir)
 # We need to concatenate years 0-20 (previously 20-40)
 # Get first run
 filename = 'atmos_daily_0'
-try:
-    dataset = nc.Dataset(rundir+filename+'.nc', 'r')
-except IOError as e:
-    print(e)
-    exit()
+dataset = nc.Dataset(rundir+filename+'.nc', 'r')
 
 time = dataset['time']
 pfull = dataset['pfull']
@@ -53,11 +49,7 @@ u_mean10 = mean_lat_weighted( ucomp[:, 13, 30:34, :].mean(axis=(-1)), lat[30:34]
 
 for i in range(1, 21):
     filename = f"atmos_daily_{i}"
-    try:
-        dataset = nc.Dataset(rundir+filename+'.nc', 'r')
-    except IOError as e:
-        print(e)
-        exit()
+    dataset = nc.Dataset(rundir+filename+'.nc', 'r')
 
     time = dataset['time']
     ucomp = dataset['ucomp']
@@ -86,7 +78,7 @@ period_sem = np.std(periods)/np.sqrt(N)
 amplitude_sem = np.std(amplitudes)/np.sqrt(N)
 print(np.std(periods)/np.sqrt(N), np.std(amplitudes)/np.sqrt(N))
 
-headers = ["run_id", "period", "amplitude", "cov_00", "cov_01", "cov_10", "cov_11", "n", "period_sem", "amplitude_sem"]
+headers = ["run_id", "period", "amplitude", "cov_00", "cov_01", "cov_10", "cov_11", "N", "period_sem", "amplitude_sem"]
 savearr = np.array([run_num, period_mean, amplitude_mean, cov[0,0], cov[0,1], cov[1,0], cov[1,1], N, period_sem, amplitude_sem])
 print(savearr)
 
