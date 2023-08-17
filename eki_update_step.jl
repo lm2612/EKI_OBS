@@ -101,7 +101,7 @@ function ek_update(iteration_::Int64, N::Int64)
     # Return dataframe in same format as previous iteration
     u_new = Matrix(u_new')
     df_new = DataFrame(u_new, u_names)
-    insertcols!(df_new, 1, :"run_ids" => df_params[:, 1])    # Keep run_ids
+    insertcols!(df_new, 1, :"run_id" => df_params[:, 1])    # Keep run_ids
     return df_new
 end
 
