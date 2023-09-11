@@ -29,17 +29,12 @@ echo "${run_num}"
 echo "**** SETUP ****"
 ulimit -s unlimited
 
-# Use cees-beta stack
-module use /home/groups/s-ees/share/sdss/spack_cees/spack/share/spack/lmod_zen2_zen2-beta/linux-centos7-x86_64/Core
+module load ifort
+module load icc
+module load netcdf-fortran
+module load netcdf-c
 
-CEES_MODULE_SUFFIX="cees-beta"
-
-module load devel gcc/10.
-module load intel-${CEES_MODULE_SUFFIX}
-module load mpich-${CEES_MODULE_SUFFIX}/
-module load netcdf-c-${CEES_MODULE_SUFFIX}/
-module load netcdf-fortran-${CEES_MODULE_SUFFIX}/
-module load anaconda-${CEES_MODULE_SUFFIX}/
+module list
 cwd=`pwd`
 
 # Currently two libraries are not found in linking on SH03_CEES: libfabric and hwloc. Manually add them here.
@@ -50,7 +45,7 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LIBFABRIC_PATH}:${HWLOC_PATH}"
 #--------------------------------------------------------------------------------------------------------
 # Set up run directory
 PLATFORM=SH03_CEES
-executable=${HOME}/MiMA/exp/exec.${PLATFORM}/mima.x
+executable=${GROUP_HOME}/${USER}/MiMA/build/mima.x
 rundir=${GROUP_SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/${run_num}/
 
 ## Run dir must already exist
@@ -82,7 +77,7 @@ echo "******* RESTARTING FROM $run_number *******"
 
 N_PROCS=32
 PLATFORM=SH03_CEES
-CCOMB=${HOME}/MiMA/bin/mppnccombine.${PLATFORM}
+CCOMB=${GROUP_HOME}/${USER}/MiMA/build/mppnccombine
 NYEAR=20
 
 for ((i=$run_number;i<=$NYEAR;i++))

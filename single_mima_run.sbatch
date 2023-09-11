@@ -30,28 +30,17 @@ echo "${run_num}"
 echo "**** SETUP ****"
 ulimit -s unlimited
 
-# Use cees-beta stack
-module use /home/groups/s-ees/share/sdss/spack_cees/spack/share/spack/lmod_zen2_zen2-beta/linux-centos7-x86_64/Core
+module load ifort
+module load icc
+module load netcdf-fortran
+module load netcdf-c
 
-CEES_MODULE_SUFFIX="cees-beta"
-
-module load devel gcc/10.
-module load intel-${CEES_MODULE_SUFFIX}
-module load mpich-${CEES_MODULE_SUFFIX}/
-module load netcdf-c-${CEES_MODULE_SUFFIX}/
-module load netcdf-fortran-${CEES_MODULE_SUFFIX}/
-module load anaconda-${CEES_MODULE_SUFFIX}/
 cwd=`pwd`
-
-# Currently two libraries are not found in linking on SH03_CEES: libfabric and hwloc. Manually add them here.
-export LIBFABRIC_PATH="/home/groups/s-ees/share/cees/spack_cees/spack/opt/spack/linux-centos7-zen2/intel-2021.4.0/libfabric-1.13.1-fcah2ztj7a4kigbly6vxqa7vuwesyxmr/lib/"
-export HWLOC_PATH="/home/groups/s-ees/share/cees/spack_cees/spack/opt/spack/linux-centos7-zen2/intel-2021.4.0/hwloc-2.5.0-4yz4g5jbydc4euoqrbudraxssx2tcaco/lib/"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LIBFABRIC_PATH}:${HWLOC_PATH}"
 
 #--------------------------------------------------------------------------------------------------------
 # Set up run directory
 PLATFORM=SH03_CEES
-executable=${HOME}/MiMA/exp/exec.${PLATFORM}/mima.x
+executable=${GROUP_HOME}/${USER}/MiMA/build/mima.x
 rundir=${GROUP_SCRATCH}/EKI_N${N}/iteration_${iteration_eki}/${run_num}/
 
 previous_iteration_eki=$((iteration_eki-1))
@@ -102,7 +91,7 @@ echo "******* RUN MIMA *******"
 
 N_PROCS=16
 PLATFORM=SH03_CEES
-CCOMB=${HOME}/MiMA/bin/mppnccombine.${PLATFORM}
+CCOMB=${GROUP_HOME}/${USER}/MiMA/build/mppnccombine
 NYEAR=20
 
 for ((i=-1;i<=$NYEAR;i++))
