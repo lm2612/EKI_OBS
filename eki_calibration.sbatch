@@ -18,7 +18,7 @@ n_max=$((${N}-1))           # run number goes from 0 to N-1
 it_first=1                  # first iteration is always 1
 
 # Number of iterations and where to start, edit:
-n_sims=21          # Max number of simulations running in paralel, either 8-10 on 32 cores, or 16-20 on 16 cores
+n_sims=18         # Max number of simulations running in paralel, either 8-10 on 32 cores, or 16-20 on 16 cores
 
 
 export JULIA_NUM_THREADS=${SLURM_CPUS_PER_TASK:=1}
