@@ -30,16 +30,4 @@ def get_QBO_periods_amplitudes(u_zonal, N_smooth=5, points_per_month=1):
     periods = np.array(roots[2::2] - roots[:-2:2])
 
     return periods, amplitudes
-    # Get QBO transition times from -ve to +ve
-    #QBO_TTs = roots[::2]
 
-    # Take difference between transition times to find period of each QBO cycle
-    #periods = QBO_TTs[1:] - QBO_TTs[:-1]
-
-    #amplitudes = np.zeros(len(periods))
-    #for ic in range(len(periods)):
-    #    start_ind = int(QBO_TTs[ic])       # start of QBO cycle
-    #    end_ind = int(QBO_TTs[ic+1])       # end of QBO cycle
-    #    amplitudes[ic] = 0.5 * (np.max(u_zonal[start_ind:end_ind]) - np.min(u_zonal[start_ind:end_ind]))
-
-    #return periods, amplitudes    
